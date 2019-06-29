@@ -8,6 +8,19 @@ class App extends Component {
     operating: false,
     operator: null
   }
+  componentDidMount() {
+    document.addEventListener('keydown', (e) => {
+      console.log(e.key)
+      let key = Number(e.key)
+      if (key >= 0 && key <= 9) {
+        this.inputKey(key)
+      }
+      let operate = ["+", "-", "*", "/", "="]
+      if (operate.indexOf(e.key) !== -1) {
+        this.operation(e.key)
+      }
+    });
+  }
 
   inputKey(numberKey) {
     const { display, operating } = this.state
@@ -39,8 +52,6 @@ class App extends Component {
       })
     }
   }
-
-
   clearButton() {
     this.setState({
       display: '0'
@@ -88,6 +99,7 @@ class App extends Component {
 
     })
   }
+
 
 
   render() {
